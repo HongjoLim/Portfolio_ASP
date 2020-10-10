@@ -1,0 +1,27 @@
+[{"Id": 1,
+    "Title:" : "Software Developer",
+    "Company" : "Geotab Inc.",
+    "City" : "Oakville",
+    "Province" : "ON",
+    "StartDate" : "2020-01-02",
+    "EndDate" : null,
+    "Description" : "Developed and maintained C# Windows Forms Desktop Applicatoins"
+    },
+    {"Id": 2,
+        "Title:" : "Software Developer Intern",
+        "Company" : "Geotab Inc.",
+        "City" : "Oakville",
+        "Province" : "ON",
+        "StartDate" : "2019-09-03",
+        "EndDate" : "2019-12-31",
+        "Description" : "Developed and maintained C# Windows Forms Desktop Applicatoins"
+    },
+    {"Id": 3,
+            "Title:" : "Software Developer co-op",
+            "Company" : "Wolseley Canada Inc.",
+            "City" : "Burlington",
+            "Province" : "ON",
+            "StartDate" : "2018-09-10",
+            "EndDate" : "2018-12-21",
+            "Description" : "Developed and maintained C# Windows Forms Desktop Applicatoins"
+            }]
