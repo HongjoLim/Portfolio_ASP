@@ -1,21 +1,51 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using ASP_Portfolio.Data.Models;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 
 namespace ASP_Portfolio.Data.Services
 {
     public class JobsService : IJobsService
     {
-        private List<Job> Jobs;
+        public List<Job> Jobs {get; set;} = new List<Job>();
 
         public JobsService()
         {
-            Jobs = new List<Job>();
-            
-        }
+            this.Jobs.Add(
+                new Job{
+                    Id = 1,
+                    Title = "Software Developer",
+                    Company = "Geotab Inc.",
+                    City = "Oakville",
+                    Province = "ON",
+                    StartDate = new System.DateTime(2020, 01, 02),
+                    EndDate = null,
+                    Description = "Developed and maintained C# Windows Forms Desktop Applications"
+                }
+            );
 
+            this.Jobs.Add(                
+                new Job{
+                    Id = 2,
+                    Title = "Software Developer Intern",
+                    Company = "Geotab Inc.",
+                    City = "Oakville",
+                    Province = "ON",
+                    StartDate = new System.DateTime(2019, 09, 03),
+                    EndDate = new System.DateTime(2019, 12, 31),
+                    Description = "Developed and maintained C# Windows Forms Desktop Applications"
+                });
+
+            this.Jobs.Add(                
+                new Job{
+                    Id = 3,
+                    Title = "Software Developer Co-op",
+                    Company = "Wolseley Canada Inc.",
+                    City = "Burlington",
+                    Province = "ON",
+                    StartDate = new System.DateTime(2018, 09, 10),
+                    EndDate = new System.DateTime(2018, 12, 21),
+                    Description = "Developed SQL Jobs, Conducted C# unit tests."
+                });
+        }
 
         public void AddJob(Job job)
         { 

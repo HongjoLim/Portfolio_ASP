@@ -49,15 +49,17 @@ namespace ASP_Portfolio.Controllers
             return Ok(job);
         }
 
-        [HttpPut("create")]
-        public IActionResult  CreateJob(Job job)
+        [HttpPost("[action]")]
+        public IActionResult CreateJob([FromBody]Job job)
         {
             if (job != null)
             {
+                job.Id = this.jobService.GetAllJobs().Count() + 1;
+
                 this.jobService.AddJob(job);
             }
 
-            return Ok();
+            return Ok(this.jobService.GetAllJobs().Count());
         }
     }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export class Jobs extends Component {
 
@@ -6,13 +7,26 @@ export class Jobs extends Component {
         super(props);
 
         this.state = {
-            jobs: []
+            jobs: [],
+            loading: true
         }
+    }
+
+    componentDidMount(){
+        this.populateJobsData();
+    }
+
+    populateJobsData(){
+        axios.get("api/jobs/GetAllJobs").then(result => {
+            const response = result.data;
+            this.setState({jobs: response, loading: false});
+            console.log(this.state.jobs.length)
+        })
     }
 
     renderAllJobsTable(jobs){
         return (
-            <table clasName="table table-striped">
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -24,13 +38,18 @@ export class Jobs extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    {
+                        jobs.map(job => (
+                    <tr key={job.id}>
+                        <td>{job.title}</td>
+                        <td>{job.company}</td>
+                        <td>{job.city}</td>
+                        <td>{job.province}</td>
+                        <td>{new Date(job.startDate).toLocaleDateString()}</td>
+                        <td>{job.endDate ? new Date(job.endDate).toLocaleDateString() : `Current Job`}</td>
                     </tr>
+                        ))
+                    }
                 </tbody>
             </table>
         )
