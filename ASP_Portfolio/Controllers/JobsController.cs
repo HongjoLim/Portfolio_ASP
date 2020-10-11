@@ -42,18 +42,21 @@ namespace ASP_Portfolio.Controllers
         [HttpPut("update/{id}")]
         public IActionResult UpdateJob(int id, [FromBody]Job job)
         {
-            if (this.jobService.GetAllJobs().FindIndex(x => x.Id == id) > 0)
+            if(job != null && id > -1)
             {
                 this.jobService.UpdateJob(id, job);
             }
+            
             return Ok(job);
         }
 
-        [HttpPut("create")]
-        public IActionResult  CreateJob(Job job)
+        [HttpPost("[action]")]
+        public IActionResult CreateJob([FromBody]Job job)
         {
             if (job != null)
             {
+                job.Id = this.jobService.GetAllJobs().Count() + 1;
+
                 this.jobService.AddJob(job);
             }
 

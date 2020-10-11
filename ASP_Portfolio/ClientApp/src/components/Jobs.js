@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export class Jobs extends Component {
 
     constructor(props){
         super(props);
 
+        this.onJobUpdate = this.onJobUpdate.bind(this);
+
         this.state = {
-            jobs: []
+            jobs: [],
+            loading: true
         }
+    }
+
+    componentDidMount(){
+        this.populateJobsData();
+    }
+
+    populateJobsData(){
+        axios.get("api/jobs/GetAllJobs").then(result => {
+            const response = result.data;
+            this.setState({jobs: response, loading: false});
+        })
+    }
+
+    onJobUpdate = (id) => {
+        const {history} = this.props;
+        history.push('/detail/' + id);
     }
 
     renderAllJobsTable(jobs){
         return (
-            <table clasName="table table-striped">
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -21,16 +41,29 @@ export class Jobs extends Component {
                         <th>Province</th>
                         <th>Start Date</th>
                         <th>End Date</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    {
+                        jobs.map(job => (
+                    <tr key={job.id}>
+                        <td>{job.title}</td>
+                        <td>{job.company}</td>
+                        <td>{job.city}</td>
+                        <td>{job.province}</td>
+                        <td>{new Date(job.startDate).toLocaleDateString()}</td>
+                        <td>{job.endDate ? new Date(job.endDate).toLocaleDateString() : `Current Job`}</td>
+                        <td>
+                            <div className="form-group">
+                                <button onClick={() => this.onJobUpdate(job.id)} className="btn btn-success">
+                                    Update
+                                </button>
+                            </div>
+                        </td>
                     </tr>
+                        ))
+                    }
                 </tbody>
             </table>
         )
