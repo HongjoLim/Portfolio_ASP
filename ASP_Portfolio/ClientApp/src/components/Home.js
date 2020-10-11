@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MyPic from '../assets/me.jpg';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -6,27 +7,28 @@ export class Home extends Component {
   render () {
     return (
     <>
-        <section class="jumbotron text-center">
-          <div class="container">
-            <img src="me.jpg" height="300" id="profile"/>
+    {console.log(MyPic)}
+        <section className="jumbotron text-center">
+          <div className="container">
+            <img src={MyPic} height="300" id="profile" alt="My Picture"/>
             <br/><br/>
             <h1>Hongjo Lim</h1>
             <br/>
-            <p class="lead text-muted">.NET, C#, Android, Python Developer</p>
+            <p className="lead text-muted">.NET, C#, Android, Python Developer</p>
             <p>
-                <a href="mailto:hongjo1988@gmail.com" class="btn btn-primary my-2">Email Me</a>
+                <a href="mailto:hongjo1988@gmail.com" className="btn btn-primary my-2">Email Me</a>
             </p>
           </div>
         </section>
-        <div class="album py-5 bg-light">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
+        <div className="album py-5 bg-light">
+          <div className="container">
+              <div className="row">
+                  <div className="col-md-4">
+                    <div className="card mb-4 shadow-sm">
                       <img src = "image.png" height="225"/>
-                      <div class="card-body">
-                      <p class="card-text"></p>
-                      <p class="card-text"></p>
+                      <div className="card-body">
+                      <p className="card-text"></p>
+                      <p className="card-text"></p>
                       </div>
                     </div>
               </div>
