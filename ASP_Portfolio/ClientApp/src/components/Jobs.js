@@ -6,6 +6,8 @@ export class Jobs extends Component {
     constructor(props){
         super(props);
 
+        this.onJobUpdate = this.onJobUpdate.bind(this);
+
         this.state = {
             jobs: [],
             loading: true
@@ -20,8 +22,12 @@ export class Jobs extends Component {
         axios.get("api/jobs/GetAllJobs").then(result => {
             const response = result.data;
             this.setState({jobs: response, loading: false});
-            console.log(this.state.jobs.length)
         })
+    }
+
+    onJobUpdate = (id) => {
+        const {history} = this.props;
+        history.push('/detail/' + id);
     }
 
     renderAllJobsTable(jobs){
@@ -35,6 +41,7 @@ export class Jobs extends Component {
                         <th>Province</th>
                         <th>Start Date</th>
                         <th>End Date</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +54,13 @@ export class Jobs extends Component {
                         <td>{job.province}</td>
                         <td>{new Date(job.startDate).toLocaleDateString()}</td>
                         <td>{job.endDate ? new Date(job.endDate).toLocaleDateString() : `Current Job`}</td>
+                        <td>
+                            <div className="form-group">
+                                <button onClick={() => this.onJobUpdate(job.id)} className="btn btn-success">
+                                    Update
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                         ))
                     }
