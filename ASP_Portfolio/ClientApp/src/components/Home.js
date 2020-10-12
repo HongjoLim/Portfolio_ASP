@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MyPic from '../assets/me.jpg';
+import MyPic from '../assets/images/me.jpg';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -20,21 +20,6 @@ export class Home extends Component {
             </p>
           </div>
         </section>
-        <div className="album py-5 bg-light">
-          <div className="container">
-              <div className="row">
-                  <div className="col-md-4">
-                    <div className="card mb-4 shadow-sm">
-                      <img src = "image.png" height="225"/>
-                      <div className="card-body">
-                      <p className="card-text"></p>
-                      <p className="card-text"></p>
-                      </div>
-                    </div>
-              </div>
-          </div>
-        </div>
-        </div>
       </>
         
     );
