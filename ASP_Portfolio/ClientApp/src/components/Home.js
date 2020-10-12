@@ -6,21 +6,15 @@ export class Home extends Component {
 
   render () {
     return (
-    <>
-    {console.log(MyPic)}
-        <section className="jumbotron text-center">
-          <div className="container">
-            <img src={MyPic} height="300" id="profile" alt="My Picture"/>
-            <br/><br/>
-            <h1>Hongjo Lim</h1>
-            <br/>
-            <p className="lead text-muted">.NET, C#, Android, Python Developer</p>
-            <p>
-                <a href="mailto:hongjo1988@gmail.com" className="btn btn-primary my-2">Email Me</a>
-            </p>
-          </div>
-        </section>
-      </>
+          <section id="intro" className="wrapper style1 fullscreen fade-up">
+						<div className="inner">
+							<h1>Hongjo Lim</h1>
+							<p>Software Developer</p><br/>
+							<ul className="actions">
+								<li><a href="#one" className="button scrolly">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
         
     );
   }
