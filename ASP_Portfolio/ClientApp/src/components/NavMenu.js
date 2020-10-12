@@ -38,7 +38,10 @@ export class NavMenu extends Component {
                 <a tag={Link} href="/jobs">Jobs</a>
                 </li>
                 <li>
-                  <a tag={Link} href="/create">Create Job</a>
+                <a tag={Link} href="/projects">Projects</a>
+                </li>
+                <li>
+                  <a tag={Link} href="/createJob">Create Job</a>
                 </li>
               </ul>
             </nav>

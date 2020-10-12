@@ -39,5 +39,22 @@ namespace ASP_Portfolio.Data
                     Description = "Developed SQL Jobs, Conducted C# unit tests."
                 }
         };
+
+        public static List<Project> Projects = new List<Project>{
+            new Project
+            {
+                Id = 1,
+                Title = "Personal Portfolio Website",
+                
+            },
+            new Project
+            {
+
+            },
+            new Project
+            {
+
+            }
+        };
     }    
 }
