@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using ASP_Portfolio.Data.Models;
 using ASP_Portfolio.Data.Services;
 using Microsoft.AspNetCore.Mvc;

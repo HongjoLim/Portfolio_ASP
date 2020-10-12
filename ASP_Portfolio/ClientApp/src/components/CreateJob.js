@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-export class Detail extends Component{
-
+export class CreateJob extends Component {
     constructor(props){
         super(props);
 
@@ -20,32 +19,10 @@ export class Detail extends Component{
             company: '',
             city: '',
             province: '',
-            startDate: new Date(),
-            endDate: new Date(),
             description: '',
+            startDate: new Date(),
+            endDate: new Date()
         }
-    }
-
-    componentDidMount(){
-        this.populateJobData();
-    }
-
-    populateJobData(){
-        const {id} = this.props.match.params;
-
-        axios.get('api/Jobs/Detail/' + id).then(job => {
-            const response = job.data;
-
-            this.setState({
-                title: response.title,
-                company: response.company,
-                city: response.city,
-                province: response.province,
-                startDate: new Date(response.startDate).toISOString().slice(0, 10),
-                endDate: response.endDate ? new Date(response.endDate).toISOString().slice(0, 10) : null,
-                description : response.description
-            })
-        })
     }
 
     onChangeTitle = (e) => {
@@ -90,34 +67,35 @@ export class Detail extends Component{
         });
     }
 
-    onSubmit = (e) =>{
+    onSubmit = (e) => {
         e.preventDefault();
         const {history} = this.props;
-        const {id} = this.props.match.params;
 
         let jobObject = {
             title: this.state.title,
             company: this.state.company,
             city: this.state.city,
             province: this.state.province,
-            startDate: this.state.startDate,
-            endDate: this.state.endDate ? this.state.endDate : null,
+            startDate: new Date(this.state.startDate),
+            endDate: this.state.endDate ? new Date(this.state.endDate) : null,
             description: this.state.description
         }
 
-        axios.put('api/jobs/update/' + id, jobObject).then(result => {
+        axios.post("api/jobs/createJob", jobObject).then(result => {
+            console.log(result.headers);
             history.push('/jobs')
         })
     }
 
     render(){
-        return <>
+        return (
+            <>
                 <div className="trip-form">
-                    <h3>Edit a Job</h3>
+                    <h3>Add new Job</h3>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label>Job Title: </label>
-                        <input type="text" className="form-control" value={this.state.title} onChange={this.onChangeTitle}></input>
+                            <input type="text" className="form-control" value={this.state.title} onChange={this.onChangeTitle}></input>
                         </div>
                         <div className="form-group">
                             <label>Company: </label>
@@ -153,10 +131,11 @@ export class Detail extends Component{
                             </div>
                         </div>
                         <div className="form-group">
-                            <input type="submit" value="Edit Job" className="btn btn-primary"/>
+                            <input type="submit" value="Add Job" className="btn btn-primary"/>
                         </div>
                     </form>
                 </div>
             </>
+        )
     }
 }
