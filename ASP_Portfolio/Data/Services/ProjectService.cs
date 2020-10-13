@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using ASP_Portfolio.Data.Models;
-using ASP_Portfolio.Data;
-using System;
 
 namespace ASP_Portfolio.Data.Services
 {
