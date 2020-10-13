@@ -49,11 +49,13 @@ namespace ASP_Portfolio.Data
             },
             new Project
             {
-
+                Id = 2,
+                Title = ""
             },
             new Project
             {
-
+                Id = 3,
+                Title = ""
             }
         };
     }    
