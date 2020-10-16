@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/ASP_Portfolio/bin/Debug/netcoreapp3.1/ASP_Portfolio.dll",
+            "program": "${workspaceFolder}/ASP_Portfolio/ASP_Portfolio/bin/Debug/netcoreapp3.1/ASP_Portfolio.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/ASP_Portfolio",
+            "cwd": "${workspaceFolder}/ASP_Portfolio/ASP_Portfolio",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {

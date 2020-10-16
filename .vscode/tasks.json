@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/ASP_Portfolio/ASP_Portfolio.csproj",
+                "${workspaceFolder}/ASP_Portfolio/ASP_Portfolio/ASP_Portfolio.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/ASP_Portfolio/ASP_Portfolio.csproj",
+                "${workspaceFolder}/ASP_Portfolio/ASP_Portfolio/ASP_Portfolio.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/ASP_Portfolio/ASP_Portfolio.csproj",
+                "${workspaceFolder}/ASP_Portfolio/ASP_Portfolio/ASP_Portfolio.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
