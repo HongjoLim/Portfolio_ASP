@@ -7,15 +7,15 @@ namespace ASP_Portfolio.Models
 {
     public interface IJobsService
     {
-        List<Job> GetAllJobs();
+        Task<List<Job>> GetAllJobs();
 
-        Job GetJobById(int id);
+        Task<Job> GetJobById(Guid id);
 
-        void UpdateJob(int id, Job job);
+        Task UpdateJob(Guid id, Job job);
 
-        void DeleteJob(int id);
+        Task DeleteJob(Guid id);
 
-        void AddJob(Job job);
+        Task AddJob(Job job);
 
     }
 }

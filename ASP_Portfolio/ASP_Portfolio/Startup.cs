@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,15 +30,25 @@ namespace ASP_Portfolio
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // Get the connection string from appsettings.json
+            var connection = Configuration.GetConnectionString("DefaultConnection") ?? "testingconnection";
+
+            // Add MyDbContext to the service collection and tell it to use Sql Server as a database provider
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connection)
+            );
+
             services.AddMvc(options => 
             {
                 options.Filters.Add<JsonExceptionFilter>();
                 options.Filters.Add<RequireHttpsOrCloseAttribute>();
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddRouting(options => options.LowercaseQueryStrings = true);
-            services.AddSingleton<IJobsService, JobsService>();
-            services.AddSingleton<IProjectService, ProjectService>();
+            services.AddTransient<IJobsService, JobsService>();
+            services.AddTransient<IProjectService, ProjectService>();
 
             services.AddApiVersioning(options =>
             {

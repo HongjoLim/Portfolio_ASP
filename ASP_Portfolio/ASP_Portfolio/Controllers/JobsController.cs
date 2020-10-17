@@ -19,45 +19,50 @@ namespace ASP_Portfolio.Controllers
         }
 
         [HttpGet(Name = nameof(GetAllJobs))]
-        public IActionResult GetAllJobs()
+        public async Task<ActionResult<List<Job>>> GetAllJobs()
         {
-            var allJobs = this.jobService.GetAllJobs();
+            var allJobs = await this.jobService.GetAllJobs();
             return Ok(allJobs);
         }
 
-        [HttpGet("detail/{id}")]
-        public IActionResult JobDetail(int id)
+        [HttpGet("[action]/{id}", Name = nameof(GetJobById))]
+        public async Task<ActionResult<Job>> GetJobById(Guid id)
         {
-            Job job = this.jobService.GetJobById(id);
+            Job job = await this.jobService.GetJobById(id);
+
+            if (job == null)
+            {
+                return NotFound();
+            }
+
+            job.Href = Url.Link(nameof(GetJobById), new { jobId = job.Id} );
             return Ok(job);
         }
 
-        [HttpDelete("delete/{id}")]
-        public IActionResult DeleteJob(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteJob(Guid id)
         {
-            this.jobService.DeleteJob(id);
+            await this.jobService.DeleteJob(id);
             return Ok();
         }
 
         [HttpPut("update/{id}")]
-        public IActionResult UpdateJob(int id, [FromBody] Job job)
+        public async Task<ActionResult> UpdateJob(Guid id, [FromBody] Job job)
         {
-            if (job != null && id > -1)
+            if (job != null)
             {
-                this.jobService.UpdateJob(id, job);
+                await this.jobService.UpdateJob(id, job);
             }
 
             return Ok(job);
         }
 
         [HttpPost("[action]")]
-        public IActionResult CreateJob([FromBody] Job job)
+        public async Task<ActionResult> CreateJob([FromBody] Job job)
         {
             if (job != null)
             {
-                job.Id = this.jobService.GetAllJobs().Count() + 1;
-
-                this.jobService.AddJob(job);
+                await this.jobService.AddJob(job);
             }
 
             return Ok();
