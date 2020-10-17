@@ -26,14 +26,14 @@ namespace ASP_Portfolio.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public IActionResult ProjectDetail(int id)
+        public IActionResult ProjectDetail(Guid id)
         {
             var project = this.projectService.GetProjectById(id);
             return Ok(project);
         }
 
         [HttpDelete("[action]/{id}")]
-        public IActionResult DeleteProject(int id)
+        public IActionResult DeleteProject(Guid id)
         {
             this.projectService.DeleteProject(id);
             return Ok();
@@ -51,7 +51,7 @@ namespace ASP_Portfolio.Controllers
         }
 
         [HttpPut("[action]/{id}")]
-        public IActionResult UpdateProject(int id, [FromBody] Project project)
+        public IActionResult UpdateProject(Guid id, [FromBody] Project project)
         {
             if (project != null)
             {

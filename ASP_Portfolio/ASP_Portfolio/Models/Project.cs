@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ASP_Portfolio.Models
 {
-    public class Project
+    public class Project : BaseModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Title { get; set; }
 

@@ -7,23 +7,30 @@ namespace ASP_Portfolio.Models
 {
     public class ProjectService : IProjectService
     {
-        public void AddProject(Project pro)
+        private AppDbContext db;
+
+        public ProjectService(AppDbContext db)
         {
-            Data.Projects.Add(pro);
+            this.db = db;    
         }
 
-        public void DeleteProject(int id)
+        public void AddProject(Project pro)
         {
-            Project pro = Data.Projects.Find(x => x.Id == id);
+            this.db.Projects.Add(pro);
+        }
+
+        public void DeleteProject(Guid id)
+        {
+            Project pro = this.db.Projects.ToList().Find(x => x.Id == id);
             if (pro != null)
             {
-                Data.Projects.Remove(pro);
+                this.db.Projects.Remove(pro);
             }
         }
 
-        public Project GetProjectById(int id)
+        public Project GetProjectById(Guid id)
         {
-            Project pro = Data.Projects.Find(x => x.Id == id);
+            Project pro = this.db.Projects.ToList().Find(x => x.Id == id);
 
             if (pro != null)
             {
@@ -35,9 +42,9 @@ namespace ASP_Portfolio.Models
             }
         }
 
-        public void UpdateProject(int id, Project pro)
+        public void UpdateProject(Guid id, Project pro)
         {
-            Project oldData = Data.Projects.Find(x => x.Id == id);
+            Project oldData = this.db.Projects.ToList().Find(x => x.Id == id);
             if (oldData != null)
             {
                 oldData.Title = pro.Title;
@@ -47,7 +54,7 @@ namespace ASP_Portfolio.Models
 
         public List<Project> GetAllProjects()
         {
-            return Data.Projects;
+            return this.db.Projects.ToList();
         }
     }
 }

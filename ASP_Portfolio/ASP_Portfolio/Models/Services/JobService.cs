@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,37 +8,36 @@ namespace ASP_Portfolio.Models
 {
     public class JobsService : IJobsService
     {
-        public void AddJob(Job job)
+        private AppDbContext db;
+
+        public JobsService(AppDbContext db)
         {
-            Data.Jobs.Add(job);
+            this.db = db;
+        }
+        public async Task AddJob(Job job)
+        {
+            await this.db.Jobs.AddAsync(job);
         }
 
-        public void DeleteJob(int id)
+        public async Task DeleteJob(Guid id)
         {
-            Job job = Data.Jobs.Find(x => x.Id == id);
+            Job job = this.db.Jobs.ToList().Find(x => x.Id == id);
             if (job != null)
             {
-                Data.Jobs.Remove(job);
+                this.db.Jobs.Remove(job);
             }
         }
 
-        public Job GetJobById(int id)
+        public async Task<Job> GetJobById(Guid id)
         {
-            Job job = Data.Jobs.Find(x => x.Id == id);
-
-            if (job != null)
-            {
-                return job;
-            }
-            else
-            {
-                return new Job();
-            }
+            Job job = await this.db.Jobs.SingleOrDefaultAsync(x => x.Id == id);
+            
+            return job;
         }
 
-        public void UpdateJob(int id, Job job)
+        public async Task UpdateJob(Guid id, Job job)
         {
-            Job oldData = Data.Jobs.Find(x => x.Id == id);
+            Job oldData = await this.db.Jobs.SingleOrDefaultAsync(x => x.Id == id);
             if (oldData != null)
             {
                 oldData.Title = job.Title;
@@ -50,9 +50,9 @@ namespace ASP_Portfolio.Models
             }
         }
 
-        public List<Job> GetAllJobs()
+        public async Task<List<Job>> GetAllJobs()
         {
-            return Data.Jobs;
+            return await this.db.Jobs.ToListAsync();
         }
     }
 }

@@ -11,10 +11,10 @@ namespace ASP_Portfolio.Models
 
         List<Project> GetAllProjects();
 
-        void DeleteProject(int id);
+        void DeleteProject(Guid id);
 
-        void UpdateProject(int id, Project pro);
+        void UpdateProject(Guid id, Project pro);
 
-        Project GetProjectById(int id);
+        Project GetProjectById(Guid id);
     }
 }
