@@ -7,14 +7,14 @@ namespace ASP_Portfolio.Models
 {
     public interface IProjectService
     {
-        void AddProject(Project pro);
+        Task AddProject(Project pro);
 
-        List<Project> GetAllProjects();
+        Task<List<Project>> GetAllProjects();
 
-        void DeleteProject(Guid id);
+        Task DeleteProject(Guid id);
 
-        void UpdateProject(Guid id, Project pro);
+        Task UpdateProject(Guid id, Project pro);
 
-        Project GetProjectById(Guid id);
+        Task<Project> GetProjectById(Guid id);
     }
 }

@@ -11,7 +11,7 @@ namespace ASP_Portfolio
 {
     public class DbInitializer
     {
-        public static async Task Initialize(AppDbContext context, IServiceProvider services)
+        public static async Task Initialize(PortfolioDbContext context, IServiceProvider services)
         {
             var logger = services.GetRequiredService<ILogger<DbInitializer>>();
 

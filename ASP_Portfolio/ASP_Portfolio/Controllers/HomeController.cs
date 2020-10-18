@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASP_Portfolio.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP_Portfolio.Controllers
@@ -16,11 +17,9 @@ namespace ASP_Portfolio.Controllers
         {
             var response = new
             {
-                href = Url.Link(nameof(Index), null),
-                jobs = new
-                {
-                    href = Url.Link(nameof(JobsController.GetAllJobs), null)
-                }
+                href = Link.To(nameof(HomeController.Index)),
+                jobs = Link.To(nameof(JobsController.GetAllJobs)),
+                projects = Link.To(nameof(ProjectsController.GetAllProjects))
             };
 
             return Ok(response);

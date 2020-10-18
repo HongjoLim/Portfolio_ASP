@@ -17,5 +17,11 @@ namespace ASP_Portfolio
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Job>().ToTable("Jobs");
+            builder.Entity<Project>().ToTable("Projects");
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace ASP_Portfolio
             var connection = Configuration.GetConnectionString("DefaultConnection") ?? "testingconnection";
 
             // Add MyDbContext to the service collection and tell it to use Sql Server as a database provider
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<PortfolioDbContext>(options =>
                 options.UseSqlServer(connection)
             );
 
@@ -47,8 +47,8 @@ namespace ASP_Portfolio
 
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddRouting(options => options.LowercaseQueryStrings = true);
-            services.AddTransient<IJobsService, JobsService>();
-            services.AddTransient<IProjectService, ProjectService>();
+            services.AddScoped<IJobsService, JobsService>();
+            services.AddScoped<IProjectService, ProjectService>();
 
             services.AddApiVersioning(options =>
             {

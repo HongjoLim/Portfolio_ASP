@@ -35,7 +35,7 @@ namespace ASP_Portfolio
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<AppDbContext>();
+                    var context = services.GetRequiredService<PortfolioDbContext>();
 
                     await DbInitializer.Initialize(context, services);
                 }

@@ -8,9 +8,9 @@ namespace ASP_Portfolio.Models
 {
     public class JobsService : IJobsService
     {
-        private AppDbContext db;
+        private PortfolioDbContext db;
 
-        public JobsService(AppDbContext db)
+        public JobsService(PortfolioDbContext db)
         {
             this.db = db;
         }

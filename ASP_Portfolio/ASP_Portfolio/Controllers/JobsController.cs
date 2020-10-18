@@ -22,7 +22,7 @@ namespace ASP_Portfolio.Controllers
         public async Task<ActionResult<List<Job>>> GetAllJobs()
         {
             var allJobs = await this.jobService.GetAllJobs();
-            return Ok(allJobs);
+            return allJobs;
         }
 
         [HttpGet("[action]/{id}", Name = nameof(GetJobById))]

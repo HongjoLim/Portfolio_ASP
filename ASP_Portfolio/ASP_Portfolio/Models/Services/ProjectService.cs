@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,30 +8,30 @@ namespace ASP_Portfolio.Models
 {
     public class ProjectService : IProjectService
     {
-        private AppDbContext db;
+        private PortfolioDbContext db;
 
-        public ProjectService(AppDbContext db)
+        public ProjectService(PortfolioDbContext db)
         {
             this.db = db;    
         }
 
-        public void AddProject(Project pro)
+        public async Task AddProject(Project pro)
         {
-            this.db.Projects.Add(pro);
+            await this.db.Projects.AddAsync(pro);
         }
 
-        public void DeleteProject(Guid id)
+        public async Task DeleteProject(Guid id)
         {
-            Project pro = this.db.Projects.ToList().Find(x => x.Id == id);
+            Project pro = await this.db.Projects.FirstOrDefaultAsync(x => x.Id == id);
             if (pro != null)
             {
                 this.db.Projects.Remove(pro);
             }
         }
 
-        public Project GetProjectById(Guid id)
+        public async Task<Project> GetProjectById(Guid id)
         {
-            Project pro = this.db.Projects.ToList().Find(x => x.Id == id);
+            Project pro = await this.db.Projects.FirstOrDefaultAsync(x => x.Id == id);
 
             if (pro != null)
             {
@@ -42,9 +43,9 @@ namespace ASP_Portfolio.Models
             }
         }
 
-        public void UpdateProject(Guid id, Project pro)
+        public async Task UpdateProject(Guid id, Project pro)
         {
-            Project oldData = this.db.Projects.ToList().Find(x => x.Id == id);
+            Project oldData = await  this.db.Projects.FirstOrDefaultAsync(x => x.Id == id);
             if (oldData != null)
             {
                 oldData.Title = pro.Title;
@@ -52,9 +53,9 @@ namespace ASP_Portfolio.Models
             }
         }
 
-        public List<Project> GetAllProjects()
+        public async Task<List<Project>> GetAllProjects()
         {
-            return this.db.Projects.ToList();
+            return await this.db.Projects.ToListAsync();
         }
     }
 }
